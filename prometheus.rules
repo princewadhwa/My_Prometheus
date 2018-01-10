@@ -1,0 +1,13 @@
+#Alert - Monitoring Host
+groups:
+- name: example
+  rules:
+  - alert: node_down
+    expr: up == 0
+    for: 5s
+    labels:
+      severity: critical
+    annotations:
+      summary: "Instance {{ $labels.instance }} down.This is dangerous and rectified immediately"
+      description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes.This is dangerous and rectified immediately"
+
