@@ -9,5 +9,5 @@ route:
 receivers:
   - name: slack
     slack_configs:
-      - api_url: 'https://hooks.slack.com/services/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'
+      - api_url: 'slack api'
         channel: '#alerts'
