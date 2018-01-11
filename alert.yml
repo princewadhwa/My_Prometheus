@@ -11,7 +11,7 @@ route:
 receivers:
   - name: slack
     slack_configs:
-      - api_url: 'https://hooks.slack.com/services/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'
+      - api_url: 'slack api'
         channel: '#alerts'
         send_resolved: true
         text: "<!alert fired> {{ range .Alerts }}\nInstance: {{ .Labels.instance }}\nsummary: {{ .Annotations.summary }}\ndescription: {{ .Annotations.description }}\n {{ end }}"
