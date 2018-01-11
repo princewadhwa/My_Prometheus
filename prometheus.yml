@@ -32,6 +32,7 @@ scrape_configs:
       - targets: ['localhost:9090']
 
   - job_name: node
+    scrape_interval: 5s
     static_configs:
       - targets: ['localhost:9100']
 
@@ -48,3 +49,19 @@ scrape_configs:
       - targets: ['localhost:8082']
         labels:
           group: 'canary'
+
+  - job_name: 'website'
+    scrape_interval: 5s
+    metrics_path: /probe
+    params:
+      module: [http_2xx]  # Look for a HTTP 200 response.
+    file_sd_configs:
+      - files:
+        - targets.yml
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: localhost:9115  # Blackbox exporter.  

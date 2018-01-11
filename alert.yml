@@ -2,8 +2,10 @@ global:
 
 route:
   receiver: slack
+  repeat_interval: 2s
   routes:
     - match:
+       severity: critical
        service: error
       receiver: slack
 receivers:
@@ -11,3 +13,6 @@ receivers:
     slack_configs:
       - api_url: 'https://hooks.slack.com/services/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'
         channel: '#alerts'
+        send_resolved: true
+        text: "<!alert fired> {{ range .Alerts }}\nInstance: {{ .Labels.instance }}\nsummary: {{ .Annotations.summary }}\ndescription: {{ .Annotations.description }}\n {{ end }}"
+

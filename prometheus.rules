@@ -3,7 +3,7 @@ groups:
 - name: example
   rules:
   - alert: node_down
-    expr: up == 0
+    expr: up{} == 0
     for: 5s
     labels:
       severity: critical

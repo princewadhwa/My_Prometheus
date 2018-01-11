@@ -1,0 +1,10 @@
+# Alert Rules
+
+ALERT AppCrash
+  IF up {} > 10
+  FOR 5s
+  LABELS { severity="critical" }
+  ANNOTATIONS {
+    summary = "Number of consecutive crashes in the past 30 seconds",
+    description = "The number of consecutive crashes in the past 30 seconds is at: . This is dangerous and rectified immediately",
+  }
